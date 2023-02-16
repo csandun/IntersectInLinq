@@ -59,10 +59,25 @@ foreach (var item in commonPeople)
     Console.WriteLine(item.Name);
 }
 
-public class Person
+Console.WriteLine("============= Complex : Using IEquatable<T> ==============");
+var list3list4CommonEquatable = list3.Intersect(list4);
+
+foreach (var item in list3list4CommonEquatable)
+{
+    Console.WriteLine(item.Name);
+}
+
+public class Person : IEquatable<Person>
 {
     public string Name { get; set; }
     public int Age { get; set; }
+
+    // override Equals method
+    public bool Equals(Person other)
+    {
+        if (other == null) return false;
+        return (this.Name == other.Name && this.Age == other.Age);
+    }
 }
 
 public class PersonComparer : IEqualityComparer<Person>
